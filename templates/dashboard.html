@@ -55,18 +55,22 @@
             </div>
         </div>
 
-        <div class="company-info">
-            <div class="company-name">{{ lender.co_name }}</div>  
-            <div class="company-id">ID: {{ lender.id }}</div>
-            <div class="subscription-status">
-                {% if lender.subscription %}
-                    Subscription: Active
-                {% else %}
-                
-                    Subscription: Expired
+        <div class="content">
+            <div class="subscription">
+                {% if lender.time_left > 5 %}
+                <p>Your subscription expires in <strong style="color: green;">{{ lender.time_left }} day(s)</strong>.</p>
+                    
+                {% elif lender.time_left < 6  and lender.time_left > -1 %}
+                <p>Your subscription expires in <strong style="color:orange;">{{ lender.time_left }} day(s)</strong>.</p>
+                {% elif lender.time_left < 0 %}
+                <p>Your subscription expired on <strong style="color:red;">{{ lender.expiry }} </strong>.</p>
+                    
                 {% endif %}
+                <button class="extend-btn"><a href="{% url 'app:subscription' %}">Subscriptions</a></button>
             </div>
-        </div>  
+        </div>
+
+
         <div style="display: none;" id="notif">
 
             <div>
