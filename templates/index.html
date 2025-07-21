@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" type="image/png" href="/static/images/logo.png">
+	<!-- <link rel="stylesheet" href="./../static/css/base1.css">-->
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<title>Create Account</title>
+
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: white;
+			text-align: center;
+		}
+
+
+		.container {
+			width: 80%;
+			margin: 20px auto;
+			padding: 20px;
+			text-align: center;
+			background: white;
+			border-radius: 8px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+		}
+
+
+		.header {
+			text-align: center;
+			padding: 10px;
+			background-color: #007bff;
+			color: white;
+			border-radius: 8px 8px 0 0;
+		}
+
+
+		.login-form {
+			width: 50%;
+			background-color: white;
+			display: block;
+			padding: 10%;
+			text-align: center;
+		}
+
+		.kim-logo {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+		}
+
+		label {
+			font-weight: bold;
+			margin: 20px;
+		}
+
+		input {
+			width: 90%;
+			margin: 10px;
+			border: 2px solid blue;
+			border-radius: 5px;
+		}
+
+		button {
+			padding-left: 20px;
+			padding-right: 20px;
+			border: none;
+			background-color: #007bff;
+			color: white;
+			border-radius: 5px;
+			font-weight: bold;
+		}
+
+		button:hover {
+			background-color: green;
+			font-size: larger;
+			cursor: pointer;
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.toggle {
+			color: #007bff;
+			font-size: 10px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<img src="static/images/logo.png" class="kim-logo">
+
+		<div class="greet" id="greet">Hi there!
+			Welcome to Kimtech Records
+		</div>
+
+
+		<div class="login-form">
+			<form action="{% url 'app:login' %}" method="POST">
+				{%csrf_token%}
+				{% if msg %}
+				<span style="color: red; font-size: 10px; background-color: white;">{{msg}}</span><br>
+				{%endif%}
+				<div class="fields">
+					Username: <br />
+
+					<input type="text" name="uname" placeholder="username" id="input" required><br>
+
+					Password: <br />
+
+					<input type="password" name="pw" id="inputPw" placeholder="password" required>
+				</div>
+
+				<span onclick="show()" class="toggle">Show Password</span> <br>
+
+				<button type="submit">Login</button>
+
+			</form>
+		</div>
+
+		<p class="create">
+			Are you a Money Lender but don't have an account yet? <br />
+			<a href="create_account">Click here to create a free account and enjoy free 30 days!</a>
+		</p>
+
+	</div>
+
+	<script>
+		function show() {
+			let view = document.getElementById("inputPw");
+			if (view.type == 'password') {
+				view.type = "text";
+			} else {
+				view.type = "password";
+			}
+		}
+
+	</script>
+</body>
+
+
+</html>

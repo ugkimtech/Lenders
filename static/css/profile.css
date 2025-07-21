@@ -1,0 +1,99 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f1f2f6;
+    margin: 0;
+    padding: 20px;
+  }
+  .profile-card, .form-card {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  .header {
+    text-align: center;
+  }
+  .logo { 
+          height: 100px; 
+          margin-right: 15px; 
+          border-radius: 100%;
+      }
+
+      .home-button { 
+          display: inline-block; 
+          background: white; 
+          color: #003366; 
+          padding: 6px 12px; 
+          margin: 5px; 
+          border-radius: 5px; 
+          cursor: pointer;
+          box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+          font-weight: bold;
+      }
+      .home-button a { 
+          text-decoration: none; 
+          color: blue; 
+      }
+
+      .company-name { 
+          font-size: 18px; 
+          font-weight: bold; 
+      }
+  .header h2 {
+    margin: 5px 0;
+  }
+  .profile-info p {
+    margin: 8px 0;
+    color: #555;
+  }
+  .status {
+    font-weight: bold;
+    color: green;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: #74b9ff;
+  }
+
+  .form-card {
+    display: none;
+    margin-top: 30px;
+  }
+
+  form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  form input, form select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+
+  .form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+  }
+
+  .form-buttons .btn {
+    flex: 1;
+    margin: 0 5px;
+  }

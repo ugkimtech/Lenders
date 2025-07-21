@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Lender Admin Dashboard</title>
+    <link rel="stylesheet" href="./../static/css/admin.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Money Lender Admin Dashboard</h1>
+
+    <!-- Summary Cards -->
+    <div class="cards">
+        <div class="card total-card">
+            <h2 id="totalCount">{{total}}</h2>
+            <p>Total Lenders</p>
+        </div>
+        <div class="card active-card">
+            <h2 id="activeCount">{{active}}</h2>
+            <p>Active Subscriptions</p>
+        </div>
+        <div class="card expired-card">
+            <h2 id="expiredCount">{{expired}}</h2>
+            <p>Expired Subscriptions</p>
+        </div>
+        <div class="card trial-card">
+            <h2 id="trialCount">{{trial}}</h2>
+            <p>Trial Users</p>
+        </div>
+    </div>
+
+
+    <!-- Table Container for Scrollable Behavior -->
+    {% if lenders %}
+    <input type="text" id="searchInput" placeholder="Search table..." onkeyup="searchTable()" class="search-box">
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Logo</th>
+                    <th>Co. Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Subscription</th>
+                    <th>Status</th>
+                    <th>Expiry</th>
+                    <th>Remaining Days</th>
+                </tr>
+            </thead>
+            <tbody class="lenderData">
+            {% for lender in lenders %}
+             <tr>
+                 <td>
+                     {% if lender.logo.url != None %}
+             <img src="{{lender.logo.url}}" alt="Company Logo" class="logo">
+        {% else %}
+             <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+        {% endif %}
+                     
+                 </td>
+                <td>{{lender.co_name}}</td>
+                <td>{{lender.tel}}</td>
+                <td>{{lender.email}}</td>
+                 {% if lender.subscription == True %}
+                 <td style="color: green;">{{lender.subscription}}</td>
+                 {% else %}
+                 <td style="color: red;">{{lender.subscription}}</td>
+                 {%endif%}
+                 {% if lender.subscription_status == 'Trial' %}
+                 <td style="background-color: orange;">{{lender.subscription_status}}</td>
+                 {%else%}
+                 <td>{{lender.subscription_status}}</td>
+                 {%endif%}
+                 <td>{{lender.expiry}}</td>
+                 {% if lender.time_left > 6 %}
+                 <td style="color: green;">{{lender.time_left}} days</td>
+                 {% elif lender.time_left < 7 and lender.time_left > 3 %}
+                 <td style="color: orange;">{{lender.time_left}} days</td>
+                 {% else %}
+                 <td style="color: red;">{{lender.time_left}} days</td>
+                 {%endif%}
+             </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {%endif%}
+    </div>
+</div>
+
+<script src="./../static/js/admin.js"></script>
+
+</body>
+</html>

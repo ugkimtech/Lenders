@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Report Error - Kimtech</title>
+  <link rel="stylesheet" href="./../static/css/report.css">
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="header">
+      {% if lender.logo.url != None %}
+      <img src="{{ lender.logo.url }}" alt="Company Logo" class="logo">
+      {% else %}
+      <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+      {% endif %}
+      <span class="company-name">{{ lender.co_name }}</span>
+    </div>
+    <p><strong>My ID : </strong>{{lender.id}}</p>
+
+
+    <h2>Report an Error</h2>
+    <span class="home-button"><a href="{% url 'app:home' %}">Home</a></span>
+    {% if msg %}
+    <p style="color: green;">{{ msg }}</p>
+    {% endif %}
+    <form action="{% url 'app:report_error' %}" method="post">
+      {% csrf_token %}
+      <label for="error">Describe the error:</label><br>
+      <textarea name="error" required placeholder="Enter the issue you faced..."></textarea>
+      <button type="submit">Send Report</button>
+    </form>
+  </div>
+
+</body>
+
+</html>

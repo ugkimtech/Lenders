@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./../static/css/dashboard.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+            {% if lender.logo.url != None %}
+            <img src="{{ lender.logo.url }}" alt="Company Logo" class="logo">
+            {% else %}
+            <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+            {% endif %}
+
+            <div class="company-info">
+                <div class="company-name">{{ lender.co_name }}</div>
+                <div class="company-id">ID: {{ lender.id }}</div>
+                <div class="subscription-status">
+                    {% if lender.subscription %}
+                    Subscription: Active
+                    {% else %}
+
+                    Subscription: Expired
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="notification" onclick="clearNotification()">
+                🔔 <span id="notif-count">{{count}}</span>
+            </div>
+        </div>
+
+        <div class="menu-container">
+            <div class="menu">
+                <button><a href="{% url 'app:home' %}">Home</a></button>
+                <button><a href="{% url 'app:add_borrower' %}">Add Loan</a></button>
+                <button><a href="{% url 'app:customers' %}">My Customers</a></button>
+                <button><a href="{% url 'app:loans' %}">Available Loans</a></button>
+                <button><a href="{% url 'app:repayments' %}">Repayments</a></button>
+                <button><a href="statistics">Statistics</a></button>
+                <button><a href="{% url 'app:aggreements' %}">Agreements</a></button>
+                <button><a href="{% url 'app:profile' %}">Profile</a></button>
+                <button><a href="{% url 'app:subscription' %}">Subscriptions</a></button>
+                <button><a href="{% url 'app:report_error' %}">Report Error</a></button>
+                <button><a
+                        href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></button>
+                <button><a href="https://kimtech.pythonanywhere.com">About Kimtech</a></button>
+                <button><a href="{% url 'app:logout' %}">Logout</a></button>
+            </div>
+        </div>
+
+        <div class="company-info">
+            <div class="company-name">{{ lender.co_name }}</div>  
+            <div class="company-id">ID: {{ lender.id }}</div>
+            <div class="subscription-status">
+                {% if lender.subscription %}
+                    Subscription: Active
+                {% else %}
+                
+                    Subscription: Expired
+                {% endif %}
+            </div>
+        </div>  
+        <div style="display: none;" id="notif">
+
+            <div>
+                <div>
+                    <h4>Notifications </h4>
+                </div>
+                {% if notifications %}
+                <ul>
+                    {% for notif in notifications %}
+                    <li>{{ notif }}</li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                No notifications.
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function clearNotification() {
+            let nModel = document.getElementById("notif");
+            if (nModel.style.display == 'none') {
+                nModel.style.display = 'flex';
+            }
+            else {
+                nModel.style.display = 'none';
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management Dashboard</title>
+    <link rel="stylesheet" href="./../static/css/loans.css">
+</head>
+<body>
+
+    <div class="header">
+        {% if lender.logo.url != None %}
+             <img src="{{lender.logo.url}}" alt="Company Logo" class="logo">
+        {% else %}
+             <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+        {% endif %}
+        <h1>{{lender.co_name}}</h1>
+    </div>
+    
+<div class="header">
+  <span>Tracked Loans Dashboard</span>
+</div>
+
+    <div class="menu-container">
+        <span class="menu-button"><a href="{% url 'app:home' %}">Home</a></span>
+            <span class="menu-button"><a href="{% url 'app:add_borrower' %}">Add Loan</a></span>
+            <span class="menu-button"><a href="{% url 'app:customers' %}">My Customers</a></span>
+            <span class="menu-button"><a href="{% url 'app:loans' %}">Available Loans</a></span>
+            <span class="menu-button"><a href="{% url 'app:repayments' %}">Repayments</a></span>
+            <span class="menu-button"><a href="statistics">Statistics</a></span>
+            <span class="menu-button"><a href="{% url 'app:aggreements' %}">Agreements</a></span>
+            <span class="menu-button"><a href="{% url 'app:profile' %}">Profile</a></span>
+            <span class="menu-button"><a href="{% url 'app:subscription' %}">Subscriptions</a></span>
+            <span class="menu-button"><a href="{% url 'app:report_error' %}">Report Error</a></span>
+            <span class="menu-button"><a href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></span>
+            <span class="menu-button"><a href="https://kimtech.pythonanywhere.com">About Kimtech</a></span>
+            <span class="menu-button"><a href="{% url 'app:logout' %}">Logout</a></span>
+    </div>
+
+    <div class="table-container">
+        {% if loans %}
+        
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchInput" onkeyup="searchTable()" placeholder="Search by anything...">
+        <div id="suggestions" style="position: absolute; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto;"></div>
+        <button class="search-btn" onclick="searchTable()">Search</button>
+    </div>
+        
+        <div class="sort-container">
+            <select id="sortDropdown" class="sort-dropdown" onchange="sortTable()">
+                <option value="1">Borrower_ID</option>
+                <option value="2">Name</option>
+                <option value="3">Loan_Date</option>
+                <option value="4">Loan_Amount</option>
+                <option value="7">Total_Loan Amount</option>
+                <option value="8">Loan Duration</option>
+                <option value="9">Last_Date</option>
+            </select>
+            
+            <button class="sort-btn" onclick="toggleSortOrder()">Change Order</button>
+        </div>
+        
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                												<th>Borrower ID</th>
+                    <th>Name</th>
+                												<th>Loan Date</th>
+                												<th>Loan Amount</th>
+                												<th>Interest Rate</th>
+                												<th>Processing Fee</th>
+                										<th>Total Loan Amount</th>
+                									<th>Loan Duration</th>
+                			  <th>Last Date</th>
+                </tr>
+            </thead>
+            {% for l in loans %}
+            <tbody>
+                <tr>
+                    <td>
+                       <img src="{{l.borrower_id.photo.url}}" alt="Thumbnail" onclick ="openImage(this)" width="100" class="profile-pic">
+                  				</td>
+               <td>{{l.borrower_id.id}}</td>
+                    <td>{{l.borrower_id.name}}</td>
+                    <td>{{l.loan_Date}}</td>
+                  <td>{{l.loan_amount|floatformat:2}}</td>
+                    <td>{{l.interest_rate|floatformat:2}}</td>
+                    <td>{{l.processing_fee|floatformat:2}}</td>
+                  										<td>{{l.total_amm|floatformat:2}}</td>
+                  										<td>{{l.duration}} day(s)</td>
+                  			  {% if l.last_date < today %}
+                  			  <td style="color:red;">{{l.last_date}}</td>
+                  			  {%else%}
+                  			  <td style="color:green;">{{l.last_date}}</td>
+			          {%endif%}
+                </tr>
+	         			{%endfor%}
+            </tbody>
+        </table>
+        {%else%}
+						       <p>No Loan(s) found!</p>
+						     {%endif%}
+    </div>
+        
+        <div id="modal" onclick ="closeImage()">
+             <img id="fullImage" src="">
+        </div>
+        <p>Thank you for choosing Kimtech Uganda!!!</p>
+        
+        
+        
+    <script src="./../static/js/loans.js"></script>
+
+</body>
+</html>

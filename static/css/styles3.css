@@ -1,0 +1,248 @@
+
+body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-family: Arial;
+    color: black;
+    gap: 1px;
+    position: static;
+}
+
+h1, h5{
+    background: whitesmoke;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+    font-size: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+input {
+    border: 5px solid blue;
+    border-radius: 30px;
+    width: 50%;
+    height: 50px;
+    font-size: 30px;
+}
+
+button{
+    width: 100px;
+    height: 50px;
+    background-color: blue;
+    border:none;
+    border-radius: 100px;
+    color: white;
+    font-size: 20px;
+}
+
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.table {
+    font-size: 35px;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    border: 2px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+tbody td {
+    height: 10px;
+}
+
+.table th {
+    background-color: palegreen;
+    color: red;
+    font-size: 30px;
+}
+
+
+tbody tr:hover {
+  background-color: white !important;
+}
+
+tbody td:hover {
+  background-color: white !important;
+    font-size: 50px;
+    color: magenta;
+    font-weight: bold;
+}
+
+.table td a{
+    text-decoration: none;
+}
+
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 15%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+
+
+#modal {
+    max-width: 60%;
+    max-height: 50%;
+}
+
+#modal img{
+    max-width: 99%;
+    max-height: 99%;
+    object-fit: contain;
+}
+
+
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+
+.short {
+    width: 80vw;
+    height: 5vh;
+    display: flex;
+    position: fixed;
+    bottom: 10px;
+    z-index: 10;
+    background-color: black;
+    border-radius: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.short img {
+    width: 80%;
+    height: 100%;
+    border-radius: 100%;
+}
+
+.short a {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addDiv {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.repayDiv {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.statDiv {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hmDiv {
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reForm{
+   	 width: 100vw !important;
+    gap:20px;
+    background: whitesmoke;
+}
+
+
+.reForm label{
+    font-size:35px;
+    font-weight: bold;
+    color: purple;
+}
+
+
+.reForm select{
+    width: 70%;
+    font-size:35px;
+    border: 3px solid purple;
+    border-radius: 10px;
+}
+
+.reForm input{
+    width: 70%;
+    border: 3px solid purple;
+    border-radius: 10px;
+}
+
+
+.reForm button{
+	    background-color: blue;
+    box-shadow: rgba(0, 0, 0, 0.5);
+    	width: 50%;
+    	font-weight: bold;
+     color: white;
+}
+
+
+.reForm button:hover{
+	background-color: green;
+}
+.reForm button:active{
+	background-color: gray;
+    color: white;
+	width: 80%;
+}
+
+
+@media screen and (orientation: landscape){
+    .short {
+    width: 80vw;
+    height: 15vh;
+    display: flex;
+    position: fixed;
+    bottom: 10px;
+    z-index: 10;
+    background-color: black;
+    border-radius: 50px;
+    z-index: 2;
+}
+
+.short img {
+    width: 50%;
+    height: 80%;
+    border-radius: 100%;
+}
+
+}

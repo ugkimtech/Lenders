@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.header {
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+
+.reg-form{
+    width: 50%;
+    background-color: white;
+    display: block;
+    padding: 10%;
+    text-align: center;
+}
+
+label{
+    font-weight: bold;
+    margin: 20px;
+}
+
+input{
+    width: 90%;
+    margin: 10px;
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+button{
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    margin: 10%;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: green;
+    font-size: larger;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+.toggle{
+    color: #007bff;
+    font-size: 10px;
+    cursor: pointer;
+}

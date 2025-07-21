@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Agreement Details</title>
+    <link rel="stylesheet" href="./../static/css/agreements.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        {% if lender.logo.url != None %}
+             <img src="{{lender.logo.url}}" alt="Company Logo" class="logo">
+        {% else %}
+             <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+        {% endif %}
+        <h1>{{lender.co_name}}</h1>
+    </header>
+
+    
+    <div class="menu-container">
+        <span class="menu-button"><a href="{% url 'app:home' %}">Home</a></span>
+            <span class="menu-button"><a href="{% url 'app:add_borrower' %}">Add Loan</a></span>
+            <span class="menu-button"><a href="{% url 'app:customers' %}">My Customers</a></span>
+            <span class="menu-button"><a href="{% url 'app:loans' %}">Available Loans</a></span>
+            <span class="menu-button"><a href="{% url 'app:repayments' %}">Repayments</a></span>
+            <span class="menu-button"><a href="statistics">Statistics</a></span>
+            <span class="menu-button"><a href="{% url 'app:aggreements' %}">Agreements</a></span>
+            <span class="menu-button"><a href="{% url 'app:profile' %}">Profile</a></span>
+            <span class="menu-button"><a href="{% url 'app:subscription' %}">Subscriptions</a></span>
+            <span class="menu-button"><a href="{% url 'app:report_error' %}">Report Error</a></span>
+            <span class="menu-button"><a href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></span>
+            <span class="menu-button"><a href="https://kimtech.pythonanywhere.com">About Kimtech</a></span>
+            <span class="menu-button"><a href="{% url 'app:logout' %}">Logout</a></span>
+    </div>
+
+ 
+    <input type="text" id="searchBox" placeholder="Search name...">
+
+    <!-- Loan Details -->
+    <h2 class="section-title">Loan & Agreement Information</h2>
+    <div class="container">
+    {% if info %}
+      {% for i in info %}
+      <div class="section">
+          <strong>{{ i.borrower_id.name }}</strong>
+        <div class="card borrower">
+            {% if i.borrower_id.photo.url != None %}
+        <img src="{{ i.borrower_id.photo.url }}" alt="Thumbnail" onclick="openImage(this)" class="profile-pic" width="100">
+        {% else %}
+        <img src="/static/images/blankPerson.jpeg" alt="Thumbnail" onclick="openImage(this)" class="profile-pic" width="100">
+        {%endif%}
+            <h2>{{ i.borrower_id.name }}</h2>
+            <p><strong>Loan ID:</strong> {{ i.loan_id.id }}</p>
+            <p><strong>Loan Date:</strong>{{ i.loan_id.loan_Date }}</p>
+            <p><strong>Loan Expiry:</strong> {{ i.loan_id.last_date }} </p>
+        </div>
+
+        <div class="card agreement">
+            <strong>{{ i.borrower_id.name }}</strong>
+            <h2>Agreement Details</h2>
+            <p><strong>Agreement ID:</strong> {{ i.aggr_id.id }}</p>
+            {% if i.aggr_id.aggreement.url != None %}
+        <img src="{{ i.aggr_id.aggreement.url }}" alt="Thumbnail" onclick="openImage(this)" class="profile-pic" width="100">
+        {% else %}
+        <img src="/static/images/blankImage.png" alt="Thumbnail" onclick="openImage(this)" class="profile-pic" width="100">
+        {% endif %}
+        </div>
+
+        <div class="card asset">
+            <strong>{{ i.borrower_id.name }}</strong>
+            <h2>Asset Information</h2>
+            <p><strong>Asset Name:</strong> {{ i.asset_name }}</p>
+            <p><strong>Description:</strong> {{ i.description }}</p>
+            {% if i.asset_photo.url != None %}
+          <img src="{{ i.asset_photo.url }}" alt="Asset" onclick="openImage(this)" width="100">
+          {% else %}
+          <img src="/static/images/blankImage.png" alt="Asset" onclick="openImage(this)" width="100">
+          {%endif%}
+        </div>
+
+        <div class="card ownership">
+            <strong>{{ i.borrower_id.name }}</strong>
+            <h2>Ownership Proof</h2>
+            {% if i.proof.url != None %}
+          <img src="{{ i.proof.url }}" alt="Proof" onclick="openImage(this)" width="100">
+          {% else %}
+          <img src="/static/images/blankImage.png" alt="Proof" onclick="openImage(this)" width="100">
+          {% endif %}
+        </div>
+       </div>
+        {% endfor %}
+        {% else %}
+        <p>Borrowers' agreements and collateral information will appear here. <br> Thsnk you for choosing kimtech Ug </p>
+        {% endif %}
+    </div>
+    
+    <div id="modal" onclick ="closeImage()">
+             <img id="fullImage" src="">
+    </div>
+
+    <script src="./../static/js/agreements.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/static/images/logo.png">
+   <!-- <link rel="stylesheet" href="./../static/css/base1.css">-->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <title>Create Account</title>
+
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.header {
+    text-align: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 8px 8px 0 0;
+}
+
+
+.reg-form{
+    width: 50%;
+    background-color: white;
+    display: block;
+    padding: 10%;
+    text-align: center;
+}
+
+label{
+    font-weight: bold;
+    margin: 20px;
+}
+
+input{
+    width: 90%;
+    margin: 10px;
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+button{
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    margin: 10%;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+button:hover{
+    background-color: green;
+    font-size: larger;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+.toggle{
+    color: #007bff;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Create Account</h1>
+            <p>Register your company with Kimtech Records</p>
+        </div>
+    
+        <div class="reg-form">
+            <form action="{% url 'kim:create_account' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+    
+                <label for="profile-photo">Company Logo:</label>
+                <input type="file" id="profile-photo" name="logo">
+    
+                <label for="company-name">Company Name</label>
+                <input type="text" id="company-name" name="co_name" required>
+    
+                <label for="phone-number">Phone Number</label>
+                <input type="tel" id="phone-number" name="tel" required>
+    
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+    
+                <label for="location">Location</label>
+                <input type="text" id="location" name="location" required>
+    
+                <label for="username">Username</label>
+                {% if ex %}
+                <br />
+                <span style="color:red; font-size: 10px;"> Username already taken, try another one! </span> <br />
+                {% endif %}
+    
+                <input type="text" id="username" name="uname" required>
+    
+                <label for="password">Password</label>
+                <input type="password" id="inputPw" name="pw" required>
+    
+                <span onclick="show()" class="toggle">Show Password</span> <br>
+    
+    
+                <button type="submit">Register</button>
+            </form>
+    
+        </div>
+    
+        <p>Already have an account, <a href="{% url 'app:login' %}">Login here</a> To get started.</p>
+    </div>
+    
+<script>
+function show(){
+    let view = document.getElementById("inputPw");
+    if(view.type == 'password'){
+        view.type = "text";
+    }else{
+        view.type = "password";
+    }
+}
+
+</script>
+</body>
+
+
+</html>

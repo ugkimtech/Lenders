@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Company Profile</title>
+  <link rel="stylesheet" href="./../static/css/profile.css">
+</head>
+<body>
+
+<div class="profile-card" id="profileView">
+  <div class="header">
+    {% if lender.logo.url != None %}
+        <img src="{{ lender.logo.url }}" alt="Company Logo" class="logo">
+    {% else %}
+        <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+    {% endif %}
+    <span class="home-button"><a href="{% url 'app:home' %}">Home</a></span>
+    <p class="company-name">{{ lender.co_name }}</p>
+
+    <p><strong>ID :</strong>{{ lender.id }}</p>
+  </div>
+  <div class="profile-info">
+    <p><strong>Username:</strong> {{ lender.username }}</p>
+    <p><strong>Email:</strong> {{ lender.email }}</p>
+    <p><strong>Phone:</strong> {{ lender.tel }}</p>
+    <p><strong>Location:</strong> {{ lender.location }}</p>
+    <p><strong>Subscription:</strong> <span class="status">{{ lender.subscription }}</span> ({{ lender.time_left }} days remaining)</p>
+    <p><strong>Expiry Date:</strong> {{ lender.expiry }}</p>
+  </div>
+  <button class="btn" onclick="toggleForm()">Update Profile</button>
+</div>
+
+<div class="form-card" id="profileForm">
+  <strong>Update Only Desired</strong>
+  	<form action="{% url 'app:profile' %}" method="POST" enctype="multipart/form-data">
+						{% csrf_token %}
+    <label for="name">Company Name</label>
+    <input type="text" id="name" value="{{ lender.co_name }}" name="co_name">
+
+    <label for="phone">Phone</label>
+    <input type="text" id="phone" value="{{ lender.tel }}" name="tel">
+
+    <label for="email">Email</label>
+    <input type="email" id="email" value="{{ lender.email }}" name="email">
+
+    <label for="location">Location</label>
+    <input type="text" id="location" value="{{ lender.location }}" name="location">
+
+    <div class="form-buttons">
+      <button type="button" class="btn" onclick="toggleForm()">Close</button>
+      <button type="submit" class="btn">Save</button>
+    </div>
+  </form>
+</div>
+
+<script src="./../static/js/profile.js"></script>
+
+</body>
+</html>

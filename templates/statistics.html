@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Money Lenders Statistics</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="./../static/css/statistics.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header">
+
+            {% if logo.url != None %}
+            <img src="{{ logo.url}}" alt="Company Logo" class="logo">
+
+            {% else %}
+
+            <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+
+            {% endif %}
+
+            <div class="company-info">
+                <div class="company-name">{{name}}</div>
+            </div>
+        </div>
+
+        <div class="menu-container">
+            <div class="menu">
+                <button> <a href="{% url 'app:home' %}">Home</a></button>
+                <button> <a href="{% url 'app:add_borrower' %}">Add Loan</a></button>
+                <button> <a href="{% url 'app:customers' %}">My Customers</a></button>
+                <button> <a href="{% url 'app:loans' %}">Available Loans</a></button>
+                <button> <a href="{% url 'app:repayments' %}">Repayments</a></button>
+                <button> <a href="statistics">Statistics</a></button>
+                <button> <a href="{% url 'app:aggreements' %}">Agreements</a></button>
+                <button> <a href="{% url 'app:profile' %}">Profile</a> </button>
+
+                <button> <a href="{% url 'app:subscription' %}">Subscriptions</a></button>
+                <button> <a href="{% url 'app:report_error' %}">Report Error</a></button>
+
+                <button> <a
+                        href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></button>
+                <button> <a href="https://kimtech.pythonanywhere.com">About Kimtech</a></button>
+                <button> <a href="{% url 'app:logout' %}">Logout</a></button>
+            </div>
+        </div>
+
+        <div>
+            <form action="{% url 'app:statistics' %}" method="POST">
+                {% csrf_token %}
+                <select id="period" name="period" class="search">
+                    <option value="1">This month</option>
+                    <option value="2">Last Month</option>
+                    <option value="3">All</option>
+                </select>
+                <button type="submit">View</button>
+            </form>
+        </div>
+
+        <div id="view">
+            <h3>{{time}}</h3>
+        </div>
+
+
+        <div class="stats">
+            <div class="card">
+                <h3>Total No. of Loans Issued</h3>
+                <p>{{total_loans}}</p>
+            </div>
+            <div class="card">
+                <h3>Total Amount Disbursed</h3>
+                <p>{{total_amm|floatformat:2}}/=</p>
+            </div>
+            <div class="card">
+                <h3>Total Partialy Paid Amount</h3>
+                <p>{{part_paid|floatformat:2}}/= ({{ptPaid_rate|floatformat:2}}%)</p>
+            </div>
+            <div class="card">
+                <h3>Successful Repayments</h3>
+                <p>Loans :{{success_loans}} ({{rate|floatformat:2}}%) </p>
+                <p>Ammount : {{success_pay|floatformat:2}}/= </p>
+            </div>
+            <div class="card">
+                <h3>Unpaid Loan Balance</h3>
+                <p style="color: gray;">(With Late Payment Fees Inclusive if exist)</p>
+                <p>{{loan_balance|floatformat:2}} /= ({{bal_rate|floatformat:2}}%)</p>
+            </div>
+            <div class="card">
+                <h3>Expected Interest</h3>
+                <p style="color: gray;">(With Late Payment Fees Inclusive if exist)</p>
+                <p>{{exp_interest|floatformat:2}} /=</p>
+            </div>
+            <div class="card">
+                <h3>Collected Interest</h3>
+                <p>{{collected_intr|floatformat:2}}/= ({{intr_rate|floatformat:2}}%)</p>
+            </div>
+            <div class="card">
+                <h3>Late Fees Expected</h3>
+                <p>{{penalty|floatformat:2}} /=</p>
+            </div>
+        </div>
+
+
+
+    </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Management Dashboard</title>
+    <link rel="stylesheet" href="./../static/css/customers.css">
+</head>
+<body>
+
+<div class="header">
+    {% if lender.logo.url != None %}
+        <img src="{{ lender.logo.url }}" alt="Company Logo" class="logo">
+    {% else %}
+        <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+    {% endif %}
+    <span class="company-name">{{ lender.co_name }}</span>
+</div>
+
+<div class="header">
+    <span>Registered Customers</span>
+</div>
+
+<div class="menu-container">
+    <span class="menu-button"><a href="{% url 'app:home' %}">Home</a></span>
+    <span class="menu-button"><a href="{% url 'app:add_borrower' %}">Add Loan</a></span>
+    <span class="menu-button"><a href="{% url 'app:customers' %}">My Customers</a></span>
+    <span class="menu-button"><a href="{% url 'app:loans' %}">Available Loans</a></span>
+    <span class="menu-button"><a href="{% url 'app:repayments' %}">Repayments</a></span>
+    <span class="menu-button"><a href="statistics">Statistics</a></span>
+    <span class="menu-button"><a href="{% url 'app:aggreements' %}">Agreements</a></span>
+            <span class="menu-button"><a href="{% url 'app:profile' %}">Profile</a></span>
+            <span class="menu-button"><a href="{% url 'app:subscription' %}">Subscriptions</a></span>
+            <span class="menu-button"><a href="{% url 'app:report_error' %}">Report Error</a></span>
+            <span class="menu-button"><a href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></span>
+            <span class="menu-button"><a href="https://kimtech.pythonanywhere.com">About Kimtech</a></span>
+            <span class="menu-button"><a href="{% url 'app:logout' %}">Logout</a></span>
+</div>
+
+<div class="container">
+    {% if loan %}
+    <div class="search-container">
+        <input type="text" class="search-box" id="searchInput" onkeyup="searchTable()" placeholder="Search loans...">
+        
+        <div id="suggestions" style="position: absolute; background: white; border: 1px solid #ddd; max-height: 200px; overflow-y: auto;"></div>
+        <button class="search-btn" onclick="searchTable()">Search</button>
+    </div>
+        
+        <button class="search-btn" onclick="searchTable()">Search</button>
+        <button class="export-btn" onclick="exportCSV()">Export Data</button>
+        
+        <div class="sort-container">
+            <select id="sortDropdown" class="sort-dropdown" onchange="sortTable()">
+                <option value="1">Loan date</option>
+                <option value="2">ID</option>
+                <option value="3">Loan ID</option>
+                <option value="4">Name</option>
+                <option value="5">Loan balance</option>
+                <option value="6">Expiry</option>
+            </select>
+            
+            <button class="sort-btn" onclick="toggleSortOrder()">Change Order</button>
+        </div>
+        
+    </div>
+
+    <div class="table-container">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Loan date</th>
+                    <th>ID</th>
+                    <th>Loan ID</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>NIN</th>
+                    <th>Password</th>
+                    <th>Loan Balance</th>
+                    <th>Expiry</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for l in loan %}
+                <tr>
+                    <td><img src="{{l.borrower_id.photo.url}}" alt="Thumbnail" onclick ="openImage(this)" width="100" class="profile-pic"></td>
+                    <td>{{ l.loan_Date }}</td>
+                    <td>{{ l.borrower_id.id }}</td>
+                    <td>{{ l.id }}</td>
+                    <td>{{ l.borrower_id.name }}</td>
+                    <td><a href="tel:{{ l.borrower_id.tel }}">{{ l.borrower_id.tel }}</a></td>
+                    <td><a href="mailto:{{ l.borrower_id.email }}">{{ l.borrower_id.email }}</a></td>
+                    <td>{{ l.borrower_id.NIN }}</td>
+                    <td>{{ l.borrower_id.pin }}</td>
+                    <td>{{ l.balance|floatformat:2 }}</td>
+                    <td>{{ l.last_date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>Your customers will appear here</p>
+    {% endif %}
+    
+    <div id="modal" onclick ="closeImage()">
+             <img id="fullImage" src="">
+        </div>
+        <p>Thank you for choosing Kimtech Uganda!!!</p>
+    </div>
+
+
+<script src="./../static/js/customers.js"></script>
+
+</body>
+</html>

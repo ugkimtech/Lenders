@@ -1,0 +1,186 @@
+body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: black;
+    background: linear-gradient(to right, lightgray, pink, whitesmoke);
+    padding: 10px;
+    margin: 10px;
+}
+
+/*  LOGIN STYLES */
+
+.kim-logo{
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+}
+
+a{
+  text-decoration: none;
+  cursor: pointer;
+  color: blue;
+}
+a:hover{
+  color: red;
+}
+a:visited{
+  color: green;
+}
+
+/* CREATE ACCOUNT */
+.icon{
+  left: 0%;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    /*max-width: 50vw;*/
+    width: 70vw;
+}
+
+.login{
+    padding: 30px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    margin: 10%;
+    flex-direction: column;
+}
+
+label {
+    color: black;
+    font-weight: bold;
+    margin: 10%;
+    margin-top: 10%;
+}
+
+input {
+    width: 80%;
+    height: 40px;
+    font-size: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-color: blue;
+}
+
+textarea {
+    width: 80%;
+    height: 70px;
+    font-size: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    border-color: blue;
+}
+
+button {
+    padding: 10px;
+    background: linear-gradient(to right, blue, white, purple);
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.toggle{
+    background: none;
+    font-size: 15px;
+}
+
+.submit {
+    width: 30%;
+    height: 80px;
+    padding: 10px;
+    background: linear-gradient(to bottom, blue, purple);
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.msg {
+    color: red;
+    width: 70vw;
+    font-size: 30px;
+    background-color: black;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+
+#modal {
+    display: none;
+    position: fixed;
+    top: 30%;
+    left: 15%;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+}
+
+
+#modal {
+    max-width: 60%;
+    max-height: 50%;
+}
+
+#modal img{
+    max-width: 99%;
+    max-height: 99%;
+    object-fit: contain;
+}
+
+.agreements{
+    box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.5);
+    border-top-left-radius: 10px;
+    background: white;
+    margin-bottom: 10px; 
+    width: 100%;
+}
+
+.agr-pic {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+}
+
+.titles {
+    font-weight: bold;
+    font-size: 20px;
+    line-break: auto;
+    color: blue;
+}
+

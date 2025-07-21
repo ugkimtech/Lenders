@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kimtech - Loan Registration</title>
+    <link rel="stylesheet" href="./../static/css/new_borrower.css">
+</head>
+<body>
+    
+    <!-- Header -->
+    <div class="header">
+        {% if lender.logo.url != None %}
+             <img src="{{lender.logo.url}}" alt="Company Logo" class="logo">
+        {% else %}
+             <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+        {% endif %}
+        <br /><br />
+        <h1>{{lender.co_name}}</h1>
+    </div>
+
+    <div class="menu-container">
+        <span class="menu-button"><a href="{% url 'app:home' %}">Home</a></span>
+            <span class="menu-button"><a href="{% url 'app:add_borrower' %}">Add Loan</a></span>
+            <span class="menu-button"><a href="{% url 'app:customers' %}">My Customers</a></span>
+            <span class="menu-button"><a href="{% url 'app:loans' %}">Available Loans</a></span>
+            <span class="menu-button"><a href="{% url 'app:repayments' %}">Repayments</a></span>
+            <span class="menu-button"><a href="statistics">Statistics</a></span>
+            <span class="menu-button"><a href="{% url 'app:aggreements' %}">Agreements</a></span>
+            <span class="menu-button"><a href="{% url 'app:profile' %}">Profile</a></span>
+            <span class="menu-button"><a href="{% url 'app:subscription' %}">Subscriptions</a></span>
+            <span class="menu-button"><a href="{% url 'app:report_error' %}">Report Error</a></span>
+            <span class="menu-button"><a href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></span>
+            <span class="menu-button"><a href="https://kimtech.pythonanywhere.com">About Kimtech</a></span>
+            <span class="menu-button"><a href="{% url 'app:logout' %}">Logout</a></span>
+    </div>
+
+    <!-- Form -->
+    <div class="container">
+        <div class="form-container">
+            <h1>Loan Registration Form</h1>
+            {%if msg%}
+              		<p class="msg">{{msg}}</p>
+           		{%endif%}
+            
+            <form action="{% url 'app:add_borrower' %}" method="POST" enctype="multipart/form-data">
+				         		{% csrf_token %}
+                
+                <!-- Personal Data Section -->
+                <div class="form-section">
+                    <div class="section-header active">
+                        Personal Data
+                    </div>
+                    <div class="section-content active">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="aggreement">Customer photo</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Photo of the customer</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="photo" name="photo" class="file-input" accept="image/*">
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Full names</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Borrower's full legal name as per national ID</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="NIN" class="required">National ID Number</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Government-issued national identification number</span>
+                                    </div>
+                                </div>
+                                {% if NINerr %}
+						
+		                              				<span style="color: red; font-size: 10px;">NIN already used on a loan in this company</span><br>
+						
+		                             				{% endif %}
+                                <input type="text" id="NIN" name="NIN" required>
+                            </div>
+                        </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="tel" class="required">Phone</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Primary contact number for communication</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="tel" name="tel" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="email">Email</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Optional email address for digital communication</span>
+                                    </div>
+                                </div>
+                                <input type="email" id="email" name="email" value="Not@added">
+                            </div>
+                        
+                        <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Place Of Residence</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Where your customer stay</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="location" name="location">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Chairperson</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Borrower's chairperson</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="chair" name="chair">
+                            </div>
+                          <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Contact (Chairperson)</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Contact number of Borrower's chairperson</span>
+                                    </div>
+                                </div>
+                                
+                                <input type="number" id="chair" name="chairTel">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Next of kin</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Borrower's next of kin</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="next-of-kin" name="nextOfKin">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Contact (Next of kin)</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Contact for Borrower's next of kin</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="next-of-kin" name="nextOfKinTel">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Business Type</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Type of business operated by the Borrower</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="business" name="buz">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="name" class="required">Location (Business)</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Location of Borrower's business</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="buz" name="buzloc">
+                            </div>
+                        <div class="form-row">
+                                <div class="label-container">
+                                    <label for=password>Password</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Provide your customer with a password which will be used for login to check his/ her loan status. <br /> NOTE: They will use National ID Number as their username (If NIN is not provided, use any word taggreement</span>
+                                    </div>
+                                </div>
+                                <input type="password" id="pw" name="pin" value="0000">
+                            <button type="button" onclick="togleView()" class="view">Show Password 😑</button>
+                            </div>
+                        </div>
+                       
+                            
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+                
+                <!-- Loan Details Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        Details of the loan applied for
+                    </div>
+                    <div class="section-content">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="loan_amount" class="required">Amount applied for</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Principal loan amount requested</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="loan_amount" name="loan_amount" required value="0">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="interest_rate" class="required">Interest (in %)</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Loan interest  in percentage (eg 20)</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="interest_rate" name="interest_rate" required value="0" step="0.01">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="processing_fee">Processing fee</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Any upfront fees for loan processing</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="processing_fee" name="processing_fee" value="0">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="date">Initial Loan Repayment date</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">First scheduled repayment date</span>
+                                    </div>
+                                </div>
+                                <input type="date" id="date" name="date">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="duration" class="required">Loan Period (days) </label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Total repayment period in days</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="date" name="duration" value="0">
+                            </div>
+                            <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="dailyPay" class="required">Daily Payment </label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Amount to be paid on a daily basis.</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="dailyPay" name="dailyPay" value="0">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="comments">Comments on the borrower</label>
+                                    <div class="tooltip-container">
+                                        <button type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Any additional notes about the borrower</span>
+                                    </div>
+                                </div>
+                                <textarea id="comments" name="comments" rows="3">Not added</textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Penalty Details Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        Penalty Details
+                    </div>
+                    <div class="section-content">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="penalty">Penalty Interest (in %)</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Additional interest charged on late payments</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="penalty" name="penalty" value="0" step="0.01">
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="p_days">Applied After how many days from loan Expiry</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Grace period <br /> before penalties apply</span>
+                                    </div>
+                                </div>
+                                <input type="number" id="p_days" name="effectDay" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Agreements & Collateral Section -->
+                <div class="form-section">
+                    <div class="section-header">
+                        Agreements & Collateral Information
+                    </div>
+                    <div class="section-content">
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="aggreement">Agreement photo</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Photo of signed loan agreement document</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="aggreement" name="aggreement" class="file-input" accept="image/*">
+                                
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="asset_name">Asset Name</label>
+                                    <div class="tooltip-container">
+                                        <button type="button"  class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Name/type of collateral asset</span>
+                                    </div>
+                                </div>
+                                <input type="text" id="asset_name" name="asset_name" value="Not added">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="description">Description</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Detailed description of collateral</span>
+                                    </div>
+                                </div>
+                                <textarea id="description" name="description" rows="3">Not added</textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="asset_photo">Asset photo</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Photo of collateral asset</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="asset_photo" name="asset_photo" class="file-input" accept="image/*">
+                                
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="form-row">
+                                <div class="label-container">
+                                    <label for="proof">Owner's photo</label>
+                                    <div class="tooltip-container">
+                                        <button  type="button" class="tooltip-btn">?</button>
+                                        <span class="tooltip-text">Photo of borrower with the asset</span>
+                                    </div>
+                                </div>
+                                <input type="file" id="proof" name="proof" class="file-input" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn-submit">Submit Loan Information</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="./../static/js/new_borrower.js"></script>
+</body>
+</html>

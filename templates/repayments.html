@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Repayment History</title>
+    <link rel="stylesheet" href="./../static/css/repayments.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            {% if lender.logo.url != None %}
+             <img src="{{lender.logo.url}}" alt="Company Logo" class="logo">
+        {% else %}
+             <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+        {% endif %}
+            <span class="company-name">{{lender.co_name}}</span>
+        </div>
+
+        <div class="menu-container">
+            <span class="menu-button"><a href="{% url 'app:home' %}">Home</a></span>
+            <span class="menu-button"><a href="{% url 'app:add_borrower' %}">Add Loan</a></span>
+            <span class="menu-button"><a href="{% url 'app:customers' %}">My Customers</a></span>
+            <span class="menu-button"><a href="{% url 'app:loans' %}">Available Loans</a></span>
+            <span class="menu-button"><a href="{% url 'app:repayments' %}">Repayments</a></span>
+            <span class="menu-button"><a href="statistics">Statistics</a></span>
+            <span class="menu-button"><a href="{% url 'app:aggreements' %}">Agreements</a></span>
+            <span class="menu-button"><a href="{% url 'app:profile' %}">Profile</a></span>
+            <span class="menu-button"><a href="{% url 'app:subscription' %}">Subscriptions</a></span>
+            <span class="menu-button"><a href="{% url 'app:report_error' %}">Report Error</a></span>
+            <span class="menu-button"><a href="https://wa.me/256706749801?text=Hello Kimtech, I wannt you to help me with...">Help</a></span>
+            <span class="menu-button"><a href="https://kimtech.pythonanywhere.com">About Kimtech</a></span>
+            <span class="menu-button"><a href="{% url 'app:logout' %}">Logout</a></span>
+        </div>
+
+        <h1>Repayment History</h1>
+
+        <button onclick="toggleForm()" class="search-btn">Add Repayment</button><br>
+        
+
+        <div class="form-container" id="repaymentForm">
+          <form action="{% url 'app:repayments' %}" method="POST">
+            {% csrf_token %}
+            <button class="close-form" onclick="closeForm()">X</button>
+            <input type="text" id="search" placeholder="Search name..." onkeyup="showSuggestions()" class="search">
+            <div id="suggestions"></div>
+            <select id="nameDropdown" name="id" class="search">
+                <option value="">Select Name</option>
+                {% for l in loans %}
+                <option value="{{l.borrower_id.id}}">ID:{{l.borrower_id.id}} => {{l.borrower_id.name}}
+                </option>
+                {% endfor %}
+            </select>
+            <input type="number" id="amount" name="paid" placeholder="Enter amount paid" class="search" required>
+            <button onclick="submitRepayment()" type="submit" class="search-btn">Submit Payment</button>
+          </form>
+        </div>
+
+        {% if repayments %}
+        
+        <input type="text" id="tableSearch" placeholder="Search in table..." onkeyup="filterTable()" class="search">
+        
+        
+        <div class="controls">
+  <label for="sortColumn">Sort by:</label>
+  <select id="sortColumn">
+    <option value="1">Loan Date</option>
+    <option value="2">Borrower ID</option>
+    <option value="3">Loan ID</option>
+    <option value="4">Borrower Name</option>
+    <option value="5">Paid Amount</option>
+    <option value="6">Percentage Paid</option>
+    <option value="7">Days Left</option>
+    <option value="8">Loan Balance</option>
+  </select>
+
+  <button id="toggleOrder">Toggle Order (Asc)</button>
+</div>
+
+
+        <div class="table-container">
+            <table id="repaymentHistory">
+                <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Loan Date</th>
+                    <th>Borrower ID</th>
+                    <th>Loan ID</th>
+                    <th>Borrower Name</th>
+                    <th>Paid Amount</th>
+                    <th>Percentage Paid</th>
+                    <th>Days Left</th>
+                    <th>Loan Balance</th>
+                </tr>
+                    
+                </thead>
+                <tbody>
+                    {% for r in repayments %}
+                <tr>
+                    <td>
+                        <img src="{{r.borrower_id.photo.url}}" alt="Thumbnail" onclick ="openImage(this)" width="100" class="profile-pic">
+                    </td>
+                    
+                    <td>{{r.loan_id.loan_Date}}</td>
+                    <td>{{r.borrower_id.id}}</td>
+                    <td>{{r.loan_id.id}}</td>
+                    <td>{{r.borrower_id.name}}</td>
+                    <td>{{r.paid|floatformat:2}}</td>
+                    <td>{{r.percentage_paid|floatformat:2}} %</td>
+                    
+                    {% if r.time_left < 0 %}
+                    <td style="color: red">Expired on {{r.loan_id.last_date}} </td>
+                    {% elif r.time_left == 0 %}
+                    <td style="color: black; background-color: orange;">Expires today </td>
+                    {% else %}
+                    <td>{{r.time_left}} day(s)</td>
+                    
+                    {% endif %}
+                    </td>
+                    <td>{{r.bal|floatformat:2}}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            
+            {% else %}
+              <p>Loan Repayment History will appear here. <br> Thank you! </p>
+            {% endif %}
+            
+        </div>
+    </div>
+    
+    <div id="modal" onclick ="closeImage()">
+             <img id="fullImage" src="">
+        </div>
+        <p>Thank you for choosing Kimtech Uganda!!!</p>
+
+    <script src="./../static/js/repayments.js"></script>
+</body>
+</html>
