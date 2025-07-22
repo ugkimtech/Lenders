@@ -47,8 +47,8 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
         'PASSWORD': 'your_db_password',
         'HOST': 'localhost',
         'PORT': '5432',
+       }
     }
-}
 
 6. **Run migrations**
    ```bash
