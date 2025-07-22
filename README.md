@@ -28,16 +28,16 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
    ```bash
    git clone https://github.com/ugkimtech/Lenders.git
    cd Lenders
-2. **setup virtual environment (optional)
+2. **setup virtual environment (optional)**
    ```bash
    python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
-3. **Install dependencies
+3. **Install dependencies**
    ```bash
    pip install -r requirements.txt
 
-4. **Configure database if want to use postgresql
+4. **Configure database if want to use postgresql**
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -49,17 +49,17 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
     }
 }
 
-5. **Run migrations
+5. **Run migrations**
    ```bash
    python manage.py migrate
 
-6. **Create superuser
+6. **Create superuser**
    ``bash
    python manage.py createsuperuser
-7. **Run development server
+7. **Run development server**
    ```bash
    python manage.py runserver
-8. **Access
+8. **Access**
    Use http://127.0.0.1:8000
    or http://localhost:8000
 
