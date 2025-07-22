@@ -38,6 +38,7 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
    pip install -r requirements.txt
 
 4. **Configure database if want to use postgresql**
+   ```python
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -49,17 +50,17 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
     }
 }
 
-5. **Run migrations**
+6. **Run migrations**
    ```bash
    python manage.py migrate
 
-6. **Create superuser**
+7. **Create superuser**
    ``bash
    python manage.py createsuperuser
-7. **Run development server**
+8. **Run development server**
    ```bash
    python manage.py runserver
-8. **Access**
+9. **Access**
    Use http://127.0.0.1:8000
    or http://localhost:8000
 
