@@ -57,12 +57,13 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
 7. **Create superuser**
    ``bash
    python manage.py createsuperuser
-8. **Run development server**
+
+ 8. **Run development server**
    ```bash
    python manage.py runserver
 9. **Access**
    Use http://127.0.0.1:8000
    or http://localhost:8000
 
-Author: KIMERA CHARLES
-Version: 1.0.0
+**Author:** KIMERA CHARLES
+**Version:** 1.0.0
