@@ -55,11 +55,11 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
    python manage.py migrate
 
 7. **Create superuser**
-   ``bash
+   ```bash
    python manage.py createsuperuser
 
-8. **Run development server**
-   ``bash
+9. **Run development server**
+   ```bash
    python manage.py runserver
 
 
