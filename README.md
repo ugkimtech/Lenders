@@ -31,7 +31,7 @@ A web-based loan tracking system built with Django to manage loans, payments, cu
 2. **setup virtual environment (optional)**
    ```bash
    python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 3. **Install dependencies**
    ```bash
