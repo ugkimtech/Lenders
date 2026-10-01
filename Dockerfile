@@ -18,8 +18,8 @@ RUN python -m pip install --upgrade pip \
 
 COPY . .
 
-RUN python manage.py collectstatic --noinput
+RUN chmod +x entrypoint.sh
 
 EXPOSE 10000
 
-CMD ["gunicorn", "Lenders.wsgi:application", "--bind", "0.0.0.0:10000", "--workers", "3"]
+ENTRYPOINT ["./entrypoint.sh"]
