@@ -32,6 +32,12 @@ def create_account(request):
         username = request.POST.get('uname')
         password = request.POST.get('pw')
         location = request.POST.get('location')
+
+
+        print(username)
+
+
+        
         try:
             Lender.objects.create(
                 logo = logo,
