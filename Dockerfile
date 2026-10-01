@@ -2,7 +2,7 @@
 FROM python:3.11-slim
 
 # set working directory
-WORKDIR /app
+WORKDIR ./
 
 # build arguments
 ARG SECRET_KEY
