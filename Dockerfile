@@ -1,24 +1,25 @@
-#use official python image
-FROM python:3.11-slim
+FROM python:3.13-slim
 
-# set working directory
-WORKDIR ./
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
 
-# build arguments
-ARG SECRET_KEY
-ARG DATABASE_URL
-ENV SECRET_KEY=$SECRET_KEY
-ENV DATABASE_URL=$DATABASE_URL
+WORKDIR /app
 
-# copy django project files
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        gcc \
+        libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements.txt .
+
+RUN python -m pip install --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
 COPY . .
-RUN ls
-RUN pip install --no-cache-dir -r requirements.txt
-RUN python manage.py collectstatic --noinput
-# expose port for django
-EXPOSE 8000
 
-# start gunicon server
-CMD python manage.py migrate --noinput && \
-    python manage.py collectstatic --noinput && \
-    gunicorn Lenders.wsgi:application --bind 0.0.0.0:8000
+RUN python manage.py collectstatic --noinput
+
+EXPOSE 10000
+
+CMD ["gunicorn", "Lenders.wsgi:application", "--bind", "0.0.0.0:10000", "--workers", "3"]
