@@ -38,5 +38,5 @@ jobs:
             --build-arg DATABASE_URL=${{ secrets.SCHOOLS_DATABASE_URL }} \
             -t ${{ secrets.DOCKER_USERNAME }}/lenders:latest ./
       
-      - name: Push image
+      - name: Push docker image
         run: docker push ${{secrets.DOCKER_USERNAME}}/lenders:latest
