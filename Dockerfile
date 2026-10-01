@@ -12,6 +12,7 @@ ENV DATABASE_URL=$DATABASE_URL
 
 # copy django project files
 COPY . .
+RUN ls
 RUN pip install --no-cache-dir -r requirements.txt
 RUN python manage.py collectstatic --noinput
 # expose port for django
