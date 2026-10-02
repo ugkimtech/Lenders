@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-kb^3cyjjeq4y)%yizv@m&&86b964=mi&ih+@653zi)u8^=8!&u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -144,8 +144,17 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'meadia')
 
 STORAGES = {
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        "BACKEND": "storages.backends.s3.S3Storage",
+        "OPTIONS": {
+            "bucket_name": os.getenv("SUPABASE_STORAGE_BUCKET"),
+            "endpoint_url": os.getenv("SUPABASE_S3_ENDPOINT"),
+            "region_name": os.getenv("SUPABASE_S3_REGION"),
+            "access_key": os.getenv("SUPABASE_S3_ACCESS_KEY"),
+            "secret_key": os.getenv("SUPABASE_S3_SECRET_KEY"),
+            "file_overwrite": False,
+        },
     },
+
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },

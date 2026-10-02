@@ -5,3 +5,5 @@ dj-database-url
 Pillow
 requests
 whitenoise
+django-storages[s3]
+boto3
