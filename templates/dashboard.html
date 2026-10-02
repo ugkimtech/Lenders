@@ -17,7 +17,7 @@
             {% if lender.logo.url != None %}
             <img src="{{ lender.logo.url }}" alt="Company Logo" class="logo">
             {% else %}
-            <img src="/static/images/logo-placeholder.png" alt="Company Logo" class="logo">
+            <img src="{% static 'images/logo-placeholder.png %}" alt="Company Logo" class="logo">
             {% endif %}
 
             <div class="company-info">
