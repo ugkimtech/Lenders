@@ -144,23 +144,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'meadia')
 
 STORAGES = {
     "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
+        "BACKEND": "Kimtech.storage.SupabaseStorage",
         "OPTIONS": {
             "bucket_name": os.getenv("SUPABASE_STORAGE_BUCKET"),
-
-            # Used by Django to upload/manage files
             "endpoint_url": os.getenv("SUPABASE_S3_ENDPOINT"),
             "region_name": os.getenv("SUPABASE_S3_REGION"),
             "access_key": os.getenv("SUPABASE_S3_ACCESS_KEY"),
             "secret_key": os.getenv("SUPABASE_S3_SECRET_KEY"),
-
             "file_overwrite": False,
-
-            # bucket is public
-            "querystring_auth": False,
-
-            # Used when Django creates {{ image.url }}
-            "public_domain": os.getenv("SUPABASE_STORAGE_PUBLIC_DOMAIN"),
         },
     },
 
