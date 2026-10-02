@@ -1,10 +1,12 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta http-equiv="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" type="image/png" href="/static/images/logo.png">
+	<link rel="icon" type="image/png" href="{% static 'images/logo.png' %}">
 	<!-- <link rel="stylesheet" href="./../static/css/base1.css">-->
 	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 	<title>Create Account</title>
@@ -95,7 +97,7 @@
 
 <body>
 	<div class="container">
-		<img src="static/images/logo.png" class="kim-logo">
+		<img src="{% static 'images/logo.png' %}" class="kim-logo">
 
 		<div class="greet" id="greet">Hi there!
 			Welcome to Kimtech Records
